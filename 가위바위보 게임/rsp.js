@@ -1,75 +1,77 @@
 function getComputerChoice() {
   const random = Math.random();
-  if (random < 0.33) {
-    return "가위";
-  } else if (random < 0.66) {
-    return "바위";
+  if (random <= 0.33) {
+    return "scissors";
+  } else if (random <= 0.66) {
+    return "rock";
   } else {
-    return "보";
+    return "paper";
   }
 }
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
     return "동점";
-  } else if (playerSelection == "가위" && computerSelection == "바위") {
+  } else if (playerSelection == "scissors" && computerSelection == "rock") {
     return "컴퓨터";
-  } else if (playerSelection == "바위" && computerSelection == "보") {
+  } else if (playerSelection == "rock" && computerSelection == "paper") {
     return "컴퓨터";
-  } else if (playerSelection == "보" && computerSelection == "가위") {
+  } else if (playerSelection == "paper" && computerSelection == "scissors") {
     return "컴퓨터";
-  } else if (playerSelection == "가위" && computerSelection == "보") {
+  } else if (playerSelection == "scissors" && computerSelection == "paper") {
     return "플레이어";
-  } else if (playerSelection == "바위" && computerSelection == "가위") {
+  } else if (playerSelection == "rock" && computerSelection == "scissors") {
     return "플레이어";
-  } else if (playerSelection == "보" && computerSelection == "바위") {
+  } else if (playerSelection == "paper" && computerSelection == "rock") {
     return "플레이어";
   }
 }
 
 function playGame() {
-  let result = "";
-  let playerWin = 0;
-  let computerWin = 0;
+  let computerSelection = getComputerChoice();
+  let result = playRound(playerSelection, computerSelection);
 
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = window.prompt(
-      "가위, 바위, 보 중 하나를 입력하세요",
-      "가위"
-    );
-    if (
-      playerSelection !== "가위" &&
-      playerSelection !== "바위" &&
-      playerSelection !== "보"
-    ) {
-      playerSelection = window.prompt(
-        "가위, 바위, 보 중 하나를 입력하세요",
-        "가위"
-      );
-    }
-    let computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
+  const content = document.createElement("div");
 
-    if (result == "플레이어") {
-      playerWin += 1;
-      console.log(`${i + 1}라운드 결과: 플레이어 승리`);
-    } else if (result == "컴퓨터") {
-      computerWin += 1;
-      console.log(`${i + 1}라운드 결과: 컴퓨터 승리`);
-    } else {
-      console.log(`${i + 1}라운드 결과: 무승부`);
-    }
+  if (result == "플레이어") {
+    playerWin += 1;
+    content.textContent = `${++count}라운드 결과: 플레이어 승리`;
+  } else if (result == "컴퓨터") {
+    computerWin += 1;
+    content.textContent = `${++count}라운드 결과: 컴퓨터 승리`;
+  } else {
+    content.textContent = `${++count}라운드 결과: 무승부`;
   }
 
-  if (playerWin > computerWin) {
-    console.log("최종 결과: 플레이어 승리!");
-  } else if (playerWin < computerWin) {
-    console.log("최종 결과: 컴퓨터 승리!");
-  } else {
-    console.log("최종 결과: 무승부입니다!");
+  document.body.appendChild(content);
+
+  if (count == 5) {
+    const result = document.createElement("div");
+    result.setAttribute("id", "result");
+
+    if (playerWin > computerWin) {
+      result.textContent = "최종 결과: 플레이어 승리!";
+    } else if (playerWin < computerWin) {
+      result.textContent = "최종 결과: 컴퓨터 승리!";
+    } else {
+      result.textContent = "최종 결과: 무승부!";
+    }
+
+    document.body.appendChild(result);
+    count = 0;
+    playerWin = 0;
+    computerWin = 0;
   }
 }
 
-setTimeout(function () {
-  playGame();
-}, 3000);
+let count = 0;
+let playerWin = 0;
+let computerWin = 0;
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    playerSelection = button.id;
+    playGame();
+  });
+});
