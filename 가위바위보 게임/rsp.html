@@ -4,37 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Scissors Paper!</title>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      h1 {
-        color: teal;
-      }
-      p {
-        margin: 30px 0px;
-        line-height: 30px;
-        text-align: center;
-      }
-      button {
-        padding: 10px 20px;
-        border: 3px solid teal;
-        background-color: white;
-        border-radius: 10px;
-        margin: 0px 10px 30px 10px;
-      }
-      div {
-        margin-bottom: 10px;
-      }
-
-      #result {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 40px;
-      }
-    </style>
+    <link rel="stylesheet" href="rsp.css" />
   </head>
   <body>
     <h1>가위 바위 보 게임!</h1>
@@ -42,7 +12,8 @@
       버튼을 눌러 게임을 시작해보세요. <br />
       5라운드 끝나면 게임 종료!
     </p>
-    <div>
+    <img id="rsp_img" src="./rock_scissors_paper.png" />
+    <div class="btns">
       <button id="scissors">가위</button>
       <button id="rock">바위</button>
       <button id="paper">보</button>

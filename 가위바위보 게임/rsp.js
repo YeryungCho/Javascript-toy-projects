@@ -72,6 +72,10 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     playerSelection = button.id;
+
+    const changeImg = document.getElementById("rsp_img");
+    changeImg.src = `./${playerSelection}.png`;
+
     playGame();
   });
 });
