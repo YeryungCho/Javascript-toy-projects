@@ -24,19 +24,13 @@ function sketch() {
       const block = document.createElement("div");
       block.setAttribute(
         "style",
-        "width:10px; height:10px; border: 1px solid black;"
+        "width:10px; height:10px; border: 1px solid rgb(0,0,0,0.3);"
       );
       flex.appendChild(block);
 
       block.addEventListener("mouseover", function (e) {
         block.style.backgroundColor =
-          "rgb(" +
-          Math.floor(Math.random() * 256) +
-          "," +
-          Math.floor(Math.random() * 256) +
-          "," +
-          Math.floor(Math.random() * 256) +
-          ")";
+          "rgb(" + Math.floor(Math.random() * 255) + ", 200, 200)";
       });
     }
   }
